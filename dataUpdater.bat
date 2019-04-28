@@ -1,10 +1,18 @@
+@echo off
+
 set scriptPath="%cd%\bin\python\APP_run.py"
 set home=%1
 
 :Main 
 	python %scriptPath%
-	IF %ERRORLEVEL% NEQ 0 call :MSG 1 "Python3 not found."
-    call :MSG 0
+	set response=%ERRORLEVEL%
+
+	IF %response% NEQ 0 ( 
+		IF %response% NEQ 2 call :MSG 1 "Python3 not found."
+		IF %response% EQU 2 call :MSG 0 2
+	) else (
+    	call :MSG 0 0
+    )
 
 :MSG
 	cls
@@ -12,7 +20,7 @@ set home=%1
 		echo Application MSG!
 		@echo.
 		echo %2
-		call %home% %2
-	) else (	
-		call %home% 0
 	)
+	
+	call %home% %2
+

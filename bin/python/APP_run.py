@@ -84,18 +84,18 @@ class GKS_Aplication:
         curentDate  = [19, 0]
 
         for data in reversed(self.urls):
-            date  = data['date']
-            iDate = [int(x) for x in date.split("_")]
-            url   = data['url']
-            fName = "{0}\\{1}.{2}".format(self.dataFolder, date, self.file_format)
-
+            date   = data['date']
+            iDate  = [int(x) for x in date.split("_")]
+            url    = data['url']
+            fName  = "{0}\\{1}.{2}".format(self.dataFolder, date, self.file_format)
+            isFile = False
             
             #if curentDate[1] < iDate[1] or curentDate[0] != iDate[0]: 
             if not date in self.localData:
                 try:
                     request.urlretrieve(url, fName)
                     curentDate = iDate
-
+                    isFile = True
                 except: self._log_append("Document for date:'{0}', not found".format(date))
             
             else: curentDate = iDate
@@ -107,7 +107,9 @@ class GKS_Aplication:
             form = '{2}{0}{1}{0}'.format(headFoot, step, '--LOADING--\n')
             
             system('cls')
-            print(form)   
+            print(form)
+            
+        if not isFile: quit(2)
 
 
 if __name__ == "__main__":

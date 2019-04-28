@@ -15,16 +15,20 @@ set log="logs.txt"
 	)
 	
 	if %response% NEQ "0" (
-		call dataUpdater.bat "%response% dataUpdater"
+		if %response%  NEQ "2" call :LogAppender "%response% dataUpdater"
 	) else (
 		call :LogAppender "Python checked data"
 	)
+
+	if %response% NEQ "2" (
+		call :LogAppender "powershell started"
+		powershell %cd%\cleanData.ps1
+		call :LogAppender "powershell finish"
+	)
 	
-	call :LogAppender "powershell started"
-	powershell %cd%\cleanData.ps1
-	call :LogAppender "powershell finish"
 	pause
-	
+	exit
+
 :LogAppender
 	echo. 				   >>%log%
 	echo. 				   >>%log%
