@@ -10,7 +10,7 @@ $footHead  = "--" * 20
 if ($files.Count -eq 0) {
     $Progress = 1
 } else {
-    $Progress = [math]::Round(20 / $files.Count)  
+    $Progress = [math]::Round(40 / $files.Count)  
 }
 
 
@@ -23,7 +23,7 @@ foreach ($file in $files) {
     if (Get-Process "WINWORD") {Wait-Process "WINWORD"}
     
     $Progress += $Progress
-    $lineProg  = '-' * $Progress
+    $lineProg = '-' * $Progress
     if ($files[$files.Count - 1] -eq $file) {$lineProg = $footHead}
     
     clear

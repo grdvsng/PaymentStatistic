@@ -90,17 +90,17 @@ class GKS_Aplication:
             fName = "{0}\\{1}.{2}".format(self.dataFolder, date, self.file_format)
 
             
-            if curentDate[1] < iDate[1] or curentDate[0] != iDate[0]: 
-                if not date in self.localData:
-                    try:
-                        request.urlretrieve(url, fName)
-                        curentDate = iDate
+            #if curentDate[1] < iDate[1] or curentDate[0] != iDate[0]: 
+            if not date in self.localData:
+                try:
+                    request.urlretrieve(url, fName)
+                    curentDate = iDate
 
-                    except: self._log_append("Document for date:'{0}', not found".format(date))
-                
-                else: curentDate = iDate
+                except: self._log_append("Document for date:'{0}', not found".format(date))
+            
+            else: curentDate = iDate
 
-            elif date in self.localData: os_remove(fName)
+            #elif date in self.localData: os_remove(fName)
              
             # Имитация загрузочной полосы.
             step += '--'; 

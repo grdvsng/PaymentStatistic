@@ -20,7 +20,9 @@ set log="logs.txt"
 		call :LogAppender "Python checked data"
 	)
 	
+	call :LogAppender "powershell started"
 	powershell %cd%\cleanData.ps1
+	call :LogAppender "powershell finish"
 	pause
 	
 :LogAppender
