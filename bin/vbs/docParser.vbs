@@ -8,6 +8,20 @@
 '	
 ' author: Sergey Trishkin
 
+Function JsonCreater(objDoc, objWord)
+	dim cell
+	Set iTable  = objWord.ActiveDocument.Tables(1)
+
+	objWord.Visible = False
+    For Each cell In iTable.range.Cells
+        if cell.RowIndex = 1 or cell.ColumnIndex > 2 then
+        	cell.range.Select
+        	objDoc.ActiveWindow.Selection.Delete
+        end if
+    Next
+	
+End Function
+
 Function cutTable(filePath, keyWord)
     Dim iParagraphs, _
         iRange, _
@@ -29,6 +43,8 @@ Function cutTable(filePath, keyWord)
     
     objDoc.Range(objDoc.Tables(1).Range.End).Select
  	objDoc.ActiveWindow.Selection.Delete
+ 	
+ 	JsonCreater objDoc, objWord
  	
  	objDoc.save
  	objDoc.close 0
