@@ -2,7 +2,7 @@
 @cd/d "%~dp0"
 
 title PaymentStatistic
-mode con:cols=48 lines=24
+mode con:cols=44 lines=24
 
 set response="%1"
 set log="logs.txt"
@@ -20,11 +20,8 @@ set log="logs.txt"
 		call :LogAppender "Python checked data"
 	)
 
-	if %response% NEQ "2" (
-		call :LogAppender "powershell started"
-		powershell %cd%\cleanData.ps1
-		call :LogAppender "powershell finish"
-	)
+	if %response% NEQ "2" call :Cleaner
+	if NOT EXIST "%cd%\data\data.xls" call :Cleaner
 	
 	pause
 	exit
@@ -35,3 +32,12 @@ set log="logs.txt"
 	echo --%date%%time%--  >>%log%
 	echo %1  >>%log%       >>%log%
 	echo. 				   >>%log%
+	
+	exit /b
+
+:Cleaner
+	call :LogAppender "powershell started"
+	powershell %cd%\cleanData.ps1
+	call :LogAppender "powershell finish"
+
+	exit /b

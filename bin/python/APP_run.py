@@ -33,10 +33,12 @@ class GKS_Aplication:
 
         for year in years:
             for month in months:
-                month = month if len(str(month)) > 1 else "0%s" % month
                 
+                url_month = month if len(str(month)) > 1 else "0%s" % month
+                month = str(month - 1) if len(str(month)) > 1 else "0%s" % str(month - 1)
+
                 result.append({
-                    "url":   url.format(**{"year": year, "month": month}),
+                    "url":   url.format(**{"year": year, "month": url_month}),
                     "date":  "{0}_{1}".format(year, month)
                 })
 

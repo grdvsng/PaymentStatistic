@@ -23,4 +23,3 @@ set home=%1
 	)
 	
 	call %home% %2
-
