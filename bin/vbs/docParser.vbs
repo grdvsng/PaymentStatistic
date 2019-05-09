@@ -7,7 +7,7 @@ Function delBadChr(str)
 	
 	regExp.IgnoreCase = True
 	regExp.Global     = True
-	regExp.Pattern    = "[^а-я a-z 0-9 !?@]"
+	regExp.Pattern    = "[^а-я1-9 !:]"
 
     delBadChr = regExp.Replace(str, "")
 
